@@ -1,0 +1,17 @@
+img{
+  positon: relative;
+}
+h3 {
+  text-align: center;
+}
+
+#wrapper {
+  width: 75%;
+  margin:auto;
+}
+
+img{
+  width: 18em;
+  height: 18em;
+  
+}
