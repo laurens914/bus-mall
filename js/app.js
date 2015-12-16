@@ -1,8 +1,8 @@
 var allProducts =[];
 var productNames= ['bag','banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass']
-
+var context = document.getElementById('resultsChart').getContext('2d');
 var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [],
     datasets: [
         {
             label: "My First dataset",
@@ -10,7 +10,7 @@ var data = {
             strokeColor: "rgba(220,220,220,0.8)",
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: []
         }
     ]
 };
@@ -20,6 +20,8 @@ function Product (imgName, path){
   this.path=path;
   this.tally=0;
   this.views=0;
+  data.labels.push(imgName);
+  data.datasets[0].data.push(0);
   allProducts.push(this);
 }
 
@@ -36,6 +38,7 @@ var productRank = {
   leftObj:null,
   midObj:null,
   rightObj:null,
+  barChart:null,
 
   leftEl:document.getElementById('img1'),
   midEl:document.getElementById('img2') ,
@@ -52,7 +55,6 @@ var productRank = {
     productRank.rightObj = allProducts[productRank.getRandomIndex()];
     if (productRank.leftObj === productRank.midObj || productRank.leftObj === productRank.rightObj || productRank.rightObj === productRank.midObj) {
       productRank.displayImages();
-      // console.log('ReRoll');
     }
     productRank.leftEl.src = productRank.leftObj.path;
     productRank.leftEl.id = productRank.leftObj.imgName;
@@ -63,10 +65,21 @@ var productRank = {
     productRank.rightEl.src = productRank.rightObj.path;
     productRank.rightEl.id = productRank.rightObj.imgName;
   },
+  tallyClicks: function(elId) {
+    for (var i in allProducts){
+      if (allProducts[i].imgName === elId) {
+        allProducts[i].tally +=1;
+        this.totalClicks +=1;
+        data.datasets[0].data[i] = allProducts[i].tally;
+
+      }
+    }
+  },
 
   showResults: function(){
     if (this.totalClicks % 15 === 0){
       this.resultsEl.hidden= false;
+      
     }
     else {
       this.resultsEl.hidden=true;
@@ -75,70 +88,72 @@ var productRank = {
 
 };
 
+
+
 productRank.leftEl.addEventListener('click', function(event){
-  // productRank.tallyVotes();
-  productRank.leftObj.tally +=1;
-  productRank.totalClicks+=1;
-  // console.log(productRank.leftObj.imgName + ' has ' + productRank.leftObj.tally);
+  productRank.tallyClicks(productRank.leftEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
 
 productRank.midEl.addEventListener('click', function(event){
-  // productRank.tallyVotes();
-  productRank.midObj.tally +=1;
-  productRank.totalClicks+=1;
-  // console.log(productRank.midObj.imgName + ' has ' + productRank.midObj.tally);
+  productRank.tallyClicks(productRank.midEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
 
 productRank.rightEl.addEventListener('click', function(event){
-  // productRank.tallyVotes();
-  productRank.rightObj.tally +=1;
-  productRank.totalClicks+=1;
-  // console.log(productRank.rightObj.imgName + ' has ' + productRank.rightObj.tally);
+  productRank.tallyClicks(productRank.rightEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
 
-// productRank.midEl.addEventListener('click', productRank.displayImages)
-// productRank.rightEl.addEventListener('click', productRank.displayImages)
-
 productRank.displayImages();
 
 results.addEventListener('click',function(){
+  refresh.hidden= false;
   renderTotals();
-  console.log('clicked');
 })
 
-var tblEl = document.getElementById('tableResults')
+refresh.addEventListener('click',function(){
+  window.location.reload()
+})
+
+// var tblEl = document.getElementById('tableResults')
 
 function renderTotals (){
-for (var i=0; i < productNames.length; i++){
-  var trEl = document.createElement('tr');
-  tblEl.appendChild(trEl);
 
-  var tdEl = document.createElement('td');
-  tdEl.textContent=productNames[i];
-  trEl.appendChild(tdEl);
-
-  var taEl = document.createElement('td');
-  taEl.textContent=allProducts[i].tally;
-  trEl.appendChild(taEl);
-  };
-  tblEl.appendChild(trEl);
+  var context = document.getElementById('resultsChart').getContext('2d');
+  var myBarChart = new Chart(context).Bar(data);
 };
 
-var context = document.getElementById('resultsChart').getContext('2d');
-var myBarChart = new Chart(context).Bar(data);
 
 
 
 
 
+// function createChart (){
+//   produceChart.hidden=false;
+//   for (var i=0; i < allProducts.length; i++){
+//   data.datasets[0].data[i]=allProducts[i].tally;
+// };
+// new Chart (context).Bar(data);
+// }
 
 
+// for (var i=0; i < productNames.length; i++){
+//   var trEl = document.createElement('tr');
+//   tblEl.appendChild(trEl);
+//
+//   var tdEl = document.createElement('td');
+//   tdEl.textContent=productNames[i];
+//   trEl.appendChild(tdEl);
+//
+//   var taEl = document.createElement('td');
+//   taEl.textContent=allProducts[i].tally;
+//   trEl.appendChild(taEl);
+//   };
+//   tblEl.appendChild(trEl);
 
 
 
