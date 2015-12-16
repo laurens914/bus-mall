@@ -3,21 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Bus Mall</title>
+    <script src='js/chart.js'></script>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div id='wrapper'>
-    <h3> Please select the product you would be most likely to purchase</h3>
+    <header class='container'>
+      <h3> Please select the product you would be most likely to purchase</h3>
+    </header>
     <div class="row">
-      <div class='one-third column u-pull-left'>
+      <div class='four columns u-pull-left'>
         <img id='img1' src="" alt="">
       </div>
-      <div class='one-third column u-pull-left'>
+      <div class='four columns u-pull-left'>
         <img id='img2' src="" alt="">
       </div>
-      <div class='one-third column u-pull-left'>
+      <div class='four columns u-pull-left'>
         <img id='img3' src="" alt="">
       </div>
     </div>
@@ -29,7 +32,9 @@
         </table>
 
     </section>
-    <script src='js/app.js'></script>
+
+    <canvas id="resultsChart" width="600" height="600"></canvas>
+  <script src='js/app.js'></script>
   </div>
   </body>
 </html>

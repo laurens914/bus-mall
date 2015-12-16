@@ -1,6 +1,20 @@
 var allProducts =[];
 var productNames= ['bag','banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass']
 
+var data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        }
+    ]
+};
+
 function Product (imgName, path){
   this.imgName = imgName;
   this.path=path;
@@ -14,6 +28,7 @@ function Product (imgName, path){
     new Product(productNames[i], 'images/' + productNames[i] + '.jpg')
   }
 })();
+
 
 
 var productRank = {
@@ -52,7 +67,9 @@ var productRank = {
   showResults: function(){
     if (this.totalClicks % 15 === 0){
       this.resultsEl.hidden= false;
-
+    }
+    else {
+      this.resultsEl.hidden=true;
     }
   }
 
@@ -112,6 +129,40 @@ for (var i=0; i < productNames.length; i++){
   };
   tblEl.appendChild(trEl);
 };
+
+var context = document.getElementById('resultsChart').getContext('2d');
+var myBarChart = new Chart(context).Bar(data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
