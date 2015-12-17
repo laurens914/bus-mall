@@ -13,5 +13,13 @@ h3 {
 img{
   width: 20em;
   height: 20em;
+  border:.5em solid;
+  border-color: #021F59;
 
+}
+body{
+  background-color:#9084BD;
+}
+h3 {
+  font-family:Quicksand;
 }

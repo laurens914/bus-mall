@@ -6,10 +6,10 @@ var data = {
     datasets: [
         {
             label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
+            fillColor: "#021F59",
+            strokeColor: "#A0529F",
+            highlightFill: "#400D23",
+            highlightStroke: "#B83848",
             data: []
         }
     ]
@@ -128,6 +128,11 @@ function renderTotals (){
   var context = document.getElementById('resultsChart').getContext('2d');
   var myBarChart = new Chart(context).Bar(data);
 };
+
+
+
+
+
 
 
 
