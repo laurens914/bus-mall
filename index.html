@@ -6,6 +6,7 @@
     <script src='js/chart.js'></script>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
@@ -13,28 +14,24 @@
     <header class='container'>
       <h3> Please select the product you would be most likely to purchase</h3>
     </header>
-    <div class="row">
-      <div class='four columns u-pull-left'>
-        <img id='img1' src="" alt="">
+      <div class="row">
+        <div class='four columns u-pull-left'>
+          <img id='img1' src="" alt="">
+        </div>
+        <div class='four columns u-pull-left'>
+          <img id='img2' src="" alt="">
+        </div>
+        <div class='four columns u-pull-left'>
+          <img id='img3' src="" alt="">
+        </div>
       </div>
-      <div class='four columns u-pull-left'>
-        <img id='img2' src="" alt="">
-      </div>
-      <div class='four columns u-pull-left'>
-        <img id='img3' src="" alt="">
-      </div>
-    </div>
-    <button type='click' name='button' id='results' hidden>Show Results</button>
-    <button type='click' name='button' id='refresh' hidden>Go Again</button>
-    <!-- <section>
-      <table  id='tableResults'>
-          <th>Product</th>
-          <th>Votes</th>
-        </table>
 
-    </section> -->
 
-    <canvas id="resultsChart" width="900" height="600"></canvas>
+      <button type='click' name='button' id='results' hidden>Show Results</button>
+      <button type='click' name='button' id='refresh' hidden>Go Again</button>
+  <section class='chart'>
+    <canvas id="resultsChart" width="1200" height="600"></canvas>
+  </section>
   <script src='js/app.js'></script>
   </div>
   </body>
