@@ -1,9 +1,6 @@
 var data;
 var allProducts =[];
 var productNames= ['bag','banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass']
-var context = document.getElementById('resultsChart').getContext('2d');
-
-
 function Product (imgName, path){
   this.imgName = imgName;
   this.path=path;
@@ -13,16 +10,12 @@ function Product (imgName, path){
   data.datasets[0].data.push(0);
   allProducts.push(this);
 }
-
 function buildAlbum(){
   for (var i=0; i< productNames.length; i++){
     new Product(productNames[i], 'images/' + productNames[i] + '.jpg')
   }
   localStorage.setItem('allProducts',JSON.stringify(allProducts));
 };
-
-
-
 var productRank = {
   totalClicks:0,
   leftObj:null,
@@ -61,28 +54,20 @@ var productRank = {
         allProducts[i].tally +=1;
         this.totalClicks +=1;
         data.datasets[0].data[i] = allProducts[i].tally;
-
       }
     }
     localStorage.setItem('allProducts',JSON.stringify(allProducts));
     localStorage.setItem('data',JSON.stringify(data));
   },
-
-
   showResults: function(){
     if (this.totalClicks % 15 === 0){
       this.resultsEl.hidden= false;
-      // productRank.leftEl.removeEventListener('click')
-      // productRank.rightEl.removeEventListener('click')
-      // productRank.midEl.removeEventListener('click')
     }
     else {
       this.resultsEl.hidden=true;
     }
   }
-
 };
-
 if (localStorage.data && localStorage.allProducts){
   allProducts = JSON.parse(localStorage.getItem('allProducts'));
   data = JSON.parse(localStorage.getItem('data'));
@@ -102,27 +87,21 @@ if (localStorage.data && localStorage.allProducts){
   };
   buildAlbum();
 };
-
 productRank.leftEl.addEventListener('click', function(event){
   productRank.tallyClicks(productRank.leftEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
-
 productRank.midEl.addEventListener('click', function(event){
   productRank.tallyClicks(productRank.midEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
-
 productRank.rightEl.addEventListener('click', function(event){
   productRank.tallyClicks(productRank.rightEl.id);
   productRank.showResults();
   productRank.displayImages();
 });
-
-
-
 productRank.displayImages();
 
 results.addEventListener('click',function(){
@@ -134,10 +113,7 @@ refresh.addEventListener('click',function(){
   window.location.reload()
 })
 
-// var tblEl = document.getElementById('tableResults')
-
 function renderTotals (){
-
   var context = document.getElementById('resultsChart').getContext('2d');
   var myBarChart = new Chart(context).Bar(data);
 };
