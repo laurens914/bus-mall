@@ -1,8 +1,9 @@
 var data;
 var allProducts =[];
-var productNames= ['bag','banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass']
+var productNames= ['bag','banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass'];
 var context = document.getElementById('resultsChart').getContext('2d');
-
+var results = document.getElementById('results');
+var refresh = document.getElementsById('refresh');
 
 function Product (imgName, path){
   this.imgName = imgName;
@@ -16,10 +17,10 @@ function Product (imgName, path){
 
 function buildAlbum(){
   for (var i=0; i< productNames.length; i++){
-    new Product(productNames[i], 'images/' + productNames[i] + '.jpg')
+    new Product(productNames[i], 'images/' + productNames[i] + '.jpg');
   }
   localStorage.setItem('allProducts',JSON.stringify(allProducts));
-};
+}
 
 
 
@@ -87,21 +88,21 @@ if (localStorage.data && localStorage.allProducts){
   allProducts = JSON.parse(localStorage.getItem('allProducts'));
   data = JSON.parse(localStorage.getItem('data'));
 } else {
-   data = {
-      labels: [],
-      datasets: [
-          {
-              label: "My First dataset",
-              fillColor: "#021F59",
-              strokeColor: "#A0529F",
-              highlightFill: "#400D23",
-              highlightStroke: "#B83848",
-              data: []
-          }
-      ]
+  data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'My First dataset',
+        fillColor: '#021F59',
+        strokeColor: '#A0529F',
+        highlightFill: '#400D23',
+        highlightStroke: '#B83848',
+        data: []
+      }
+    ]
   };
   buildAlbum();
-};
+}
 
 productRank.leftEl.addEventListener('click', function(event){
   productRank.tallyClicks(productRank.leftEl.id);
@@ -124,15 +125,14 @@ productRank.rightEl.addEventListener('click', function(event){
 
 
 productRank.displayImages();
-
 results.addEventListener('click',function(){
   refresh.hidden= false;
   renderTotals();
-})
+});
 
 refresh.addEventListener('click',function(){
-  window.location.reload()
-})
+  window.location.reload();
+});
 
 // var tblEl = document.getElementById('tableResults')
 
@@ -140,7 +140,7 @@ function renderTotals (){
 
   var context = document.getElementById('resultsChart').getContext('2d');
   var myBarChart = new Chart(context).Bar(data);
-};
+}
 
 
 
